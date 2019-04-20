@@ -34,7 +34,7 @@ namespace WordPressAutomation
             this.userName = userName;
         }
 
-        public object WithPassword(string password)
+        public LoginCommand WithPassword(string password)
         {
             this.password = password;
             return this;

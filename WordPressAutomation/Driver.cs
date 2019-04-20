@@ -13,5 +13,10 @@ namespace WordPressAutomation
             Instance = new ChromeDriver();
             Instance.Manage().Timeouts().ImplicitWait.(TimeSpan.FromSeconds(5));
         }
+
+        public static void Close()
+        {
+            Instance.Close();
+        }
     }
 }

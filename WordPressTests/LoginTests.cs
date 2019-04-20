@@ -17,12 +17,13 @@ namespace WordPressTests
         public void AdminUserCanLogin()
         {
             LoginPage.GoTo();
-            LoginPage.LoginAs("test").WithPassword("password").Login();
+            LoginPage.LoginAs("test").WithPassword("z$olpR5FSaVJU^A#c!").Login();
 
             Assert.IsTrue(DashboardPage.IsAt, "Failed to login as und administrator, ya?");
         }
+
         [TestCleanup]
-        public void Cleanup()
+        public void Clenup()
         {
             Driver.Close();
         }
