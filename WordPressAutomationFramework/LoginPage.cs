@@ -11,9 +11,7 @@ namespace WordPressAutomationFramework
     {
         public static void GoTo()
         {
-            var driver = new ChromeDriver();
-
-            driver.Navigate().GoToUrl("http://localhost/test/wp-login.php");
+            Driver.Instance.Navigate().GoToUrl("http://localhost/test/wp-login.php");
         }
 
         public static LoginCommand LoginAs(string UserName)
@@ -32,15 +30,15 @@ namespace WordPressAutomationFramework
             this.userName = userName;
         }
 
-        public void Login()
-        {
-            throw new NotImplementedException();
-        }
-
         public LoginCommand WithPassword(string password)
         {
             this.password = password;
             return this;
+        }
+
+        public void Login()
+        {
+            Driver.Instance.
         }
     }
 }

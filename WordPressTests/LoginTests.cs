@@ -7,6 +7,13 @@ namespace WordPressTests
     [TestClass]
     public class LoginTests
     {
+        [TestInitialize]
+        public void Init()
+        {
+            Driver.Initialize();
+        }
+
+
         [TestMethod]
         public void AdminUserCanLogin()
         {
