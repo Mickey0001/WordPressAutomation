@@ -11,6 +11,7 @@ namespace WordPressAutomationFramework
         public static void Initialize()
         {
             Instance = new ChromeDriver();
+            Instance.Manage().Window.Maximize();
             Instance.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(5);
         }
     }

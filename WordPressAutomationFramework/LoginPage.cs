@@ -1,9 +1,6 @@
-﻿using OpenQA.Selenium.Chrome;
+﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WordPressAutomationFramework
 {
@@ -12,6 +9,8 @@ namespace WordPressAutomationFramework
         public static void GoTo()
         {
             Driver.Instance.Navigate().GoToUrl("http://localhost/test/wp-login.php");
+            var wait = new WebDriverWait(Driver.Instance, TimeSpan.FromSeconds(10));
+            wait.Until(d => d.SwitchTo().ActiveElement().GetAttribute("id") == "user_login");
         }
 
         public static LoginCommand LoginAs(string UserName)
@@ -22,12 +21,12 @@ namespace WordPressAutomationFramework
 
     public class LoginCommand
     {
-        private readonly string userName;
+        private readonly string UserName;
         private string password;
 
-        public LoginCommand(string userName)
+        public LoginCommand(string UserName)
         {
-            this.userName = userName;
+            this.UserName = UserName;
         }
 
         public LoginCommand WithPassword(string password)
@@ -38,7 +37,14 @@ namespace WordPressAutomationFramework
 
         public void Login()
         {
-            Driver.Instance.
+            var LoginInput = Driver.Instance.FindElement(By.Id("user_login"));
+            LoginInput.SendKeys(UserName);
+
+            var PasswordInput = Driver.Instance.FindElement(By.Id("user_pass"));
+            PasswordInput.SendKeys(password);
+
+            var LoginButton = Driver.Instance.FindElement(By.Id("wp-submit"));
+            LoginButton.Click();
         }
     }
 }
