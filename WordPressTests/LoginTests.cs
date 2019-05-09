@@ -20,7 +20,13 @@ namespace WordPressTests
             LoginPage.GoTo();
             LoginPage.LoginAs("test").WithPassword("z$olpR5FSaVJU^A#c!").Login();
 
-           // Assert.IsTrue(DashboardPage.IsAt, "Failed to login as admin");
+            Assert.IsTrue(DashboardPage.IsAt, "Failed to login as admin");
+        }
+
+        [TestCleanup]
+        public void Cleanup()
+        {
+            Driver.Close();
         }
     }
 }

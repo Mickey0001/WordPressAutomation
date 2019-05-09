@@ -14,5 +14,10 @@ namespace WordPressAutomationFramework
             Instance.Manage().Window.Maximize();
             Instance.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(5);
         }
+
+        public static void Close()
+        {
+            Instance.Close();
+        }
     }
 }
