@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using OpenQA.Selenium;
 
 namespace WordPressAutomationFramework
@@ -24,6 +25,22 @@ namespace WordPressAutomationFramework
             var Message = Driver.Instance.FindElement(By.Id("message"));
             var NewPostLink = Message.FindElements(By.TagName("a"))[0];
             NewPostLink.Click();
+        }
+
+        public static bool IsInEditMode()
+        {
+            return Driver.Instance.FindElement(By.TagName("h1")) != null;
+        }
+
+        public static string Title
+        {
+            get
+            {
+                var title = Driver.Instance.FindElement(By.Id("title"));
+                if (title != null)
+                    return title.GetAttribute("value");
+                return string.Empty;
+            }
         }
     }
 
