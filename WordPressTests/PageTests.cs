@@ -9,15 +9,8 @@ using WordPressAutomationFramework;
 namespace WordPressTests
 {
     [TestClass]
-    public class PageTests
+    public class PageTests : WordPressTest
     {
-        [TestInitialize]
-        public void Init()
-        {
-            Driver.Initialize();
-        }
-
-
         [TestMethod]
         public void CanEditPage()
         {
@@ -29,12 +22,6 @@ namespace WordPressTests
 
             Assert.IsTrue(NewPostPage.IsInEditMode(), "Not in edit mode");
             Assert.AreEqual("Sample Page", NewPostPage.Title, "Title did no match");
-        }
-
-        [TestCleanup]
-        public void Cleanup()
-        {
-            Driver.Close();
         }
     }
 }

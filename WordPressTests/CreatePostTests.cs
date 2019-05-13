@@ -4,15 +4,8 @@ using WordPressAutomationFramework;
 namespace WordPressTests
 {
     [TestClass]
-    public class CreatePostTests
+    public class CreatePostTests : WordPressTest
     {
-        [TestInitialize]
-        public void Init()
-        {
-            Driver.Initialize();
-        }
-
-
         [TestMethod]
         public void CanCreateBasicPost()
         {
@@ -25,12 +18,6 @@ namespace WordPressTests
             NewPostPage.GoToNewPost();
 
             Assert.AreEqual(PostPage.Title, "Test post title", "Title did not match the test post");
-        }
-
-        [TestCleanup]
-        public void Cleanup()
-        {
-            Driver.Close();
         }
     }
 }

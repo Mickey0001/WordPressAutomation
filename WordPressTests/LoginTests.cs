@@ -5,15 +5,8 @@ using WordPressAutomationFramework;
 namespace WordPressTests
 {
     [TestClass]
-    public class LoginTests
+    public class LoginTests : WordPressTest
     {
-        [TestInitialize]
-        public void Init()
-        {
-            Driver.Initialize();
-        }
-
-
         [TestMethod]
         public void AdminUserCanLogin()
         {
@@ -21,12 +14,6 @@ namespace WordPressTests
             LoginPage.LoginAs("test").WithPassword("z$olpR5FSaVJU^A#c!").Login();
 
             Assert.IsTrue(DashboardPage.IsAt, "Failed to login as admin");
-        }
-
-        [TestCleanup]
-        public void Cleanup()
-        {
-            Driver.Close();
         }
     }
 }
