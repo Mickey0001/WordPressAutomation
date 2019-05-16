@@ -9,9 +9,6 @@ namespace WordPressTests
         [TestMethod]
         public void CanCreateBasicPost()
         {
-            LoginPage.GoTo();
-            LoginPage.LoginAs("test").WithPassword("z$olpR5FSaVJU^A#c!").Login();
-
             NewPostPage.GoTo();
             NewPostPage.CreatePost("Test post title").WithBody("Post body").Publish();
 

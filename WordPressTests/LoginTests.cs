@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WordPressAutomationFramework;
 
 namespace WordPressTests
@@ -10,9 +9,6 @@ namespace WordPressTests
         [TestMethod]
         public void AdminUserCanLogin()
         {
-            LoginPage.GoTo();
-            LoginPage.LoginAs("test").WithPassword("z$olpR5FSaVJU^A#c!").Login();
-
             Assert.IsTrue(DashboardPage.IsAt, "Failed to login as admin");
         }
     }
