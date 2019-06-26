@@ -7,6 +7,10 @@ namespace WordPressAutomationFramework
     public class Driver
     {
         public static IWebDriver Instance { get; set; }
+        public static string BaseAddress
+        {
+            get { return "wordpress.com/"; }
+        }
 
         public static void Initialize()
         {

@@ -10,7 +10,7 @@ namespace WordPressTests
         {
             Driver.Initialize();
             LoginPage.GoTo();
-            LoginPage.LoginAs("test").WithPassword("z$olpR5FSaVJU^A#c!").Login();
+            LoginPage.LoginAs("tester").WithPassword("cNVe$usu8%BVyzGnYtXJmqJf").Login();
         }
 
         [TestCleanup]
