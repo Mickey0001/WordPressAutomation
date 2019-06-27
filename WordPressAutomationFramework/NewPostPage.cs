@@ -8,6 +8,7 @@ namespace WordPressAutomationFramework
     {
         public static void GoTo()
         {
+            //Maybe make a general menu navigation
             var MenuPosts = Driver.Instance.FindElement(By.Id("menu-posts"));
             MenuPosts.Click();
 
@@ -68,7 +69,7 @@ namespace WordPressAutomationFramework
             Driver.Instance.SwitchTo().ActiveElement().SendKeys(Body);
             Driver.Instance.SwitchTo().DefaultContent();
 
-            Thread.Sleep(1000);
+            Driver.Wait(TimeSpan.FromSeconds(1));
 
             Driver.Instance.FindElement(By.Id("publish")).Click();
         }
