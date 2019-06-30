@@ -9,11 +9,8 @@ namespace WordPressAutomationFramework
         public static void GoTo()
         {
             //Maybe make a general menu navigation
-            var MenuPosts = Driver.Instance.FindElement(By.Id("menu-posts"));
-            MenuPosts.Click();
+            LeftNavigation.Posts.AddNew.Select();
 
-            var AddNew = Driver.Instance.FindElement(By.LinkText("Add New"));
-            AddNew.Click();
         }
 
         public static CreatePostCommand CreatePost(string Title)

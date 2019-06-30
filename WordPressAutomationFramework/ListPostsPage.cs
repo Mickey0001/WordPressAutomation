@@ -10,6 +10,7 @@ namespace WordPressAutomationFramework
             switch (postType)
             {
                 case PostType.Page:
+                    LeftNavigation.Pages.AllPages.Select();
                     Driver.Instance.FindElement(By.Id("menu-pages")).Click();
                     Driver.Instance.FindElement(By.LinkText("All Pages")).Click();
                     break;
