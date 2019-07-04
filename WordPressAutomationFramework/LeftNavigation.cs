@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using System;
+using OpenQA.Selenium;
 
 namespace WordPressAutomationFramework
 {
@@ -11,6 +12,8 @@ namespace WordPressAutomationFramework
             {
                 public static void Select()
                 {
+                    MenuSelector.Select("menu-posts", "Add New");
+
                     var MenuPosts = Driver.Instance.FindElement(By.Id("menu-posts"));
                     MenuPosts.Click();
 
@@ -29,6 +32,15 @@ namespace WordPressAutomationFramework
                     Driver.Instance.FindElement(By.LinkText("All Pages")).Click();
                 }
             }
+        }
+    }
+
+    internal class MenuSelector
+    {
+        public static void Select(string TopLevelMenuId, string SubMenuLinkText)
+        {
+            Driver.Instance.FindElement(By.Id(TopLevelMenuId)).Click();
+            Driver.Instance.FindElement(By.LinkText(SubMenuLinkText)).Click();
         }
     }
 }
