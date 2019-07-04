@@ -13,12 +13,6 @@ namespace WordPressAutomationFramework
                 public static void Select()
                 {
                     MenuSelector.Select("menu-posts", "Add New");
-
-                    var MenuPosts = Driver.Instance.FindElement(By.Id("menu-posts"));
-                    MenuPosts.Click();
-
-                    var AddNew = Driver.Instance.FindElement(By.LinkText("Add New"));
-                    AddNew.Click();
                 }
             }
         }
@@ -28,8 +22,7 @@ namespace WordPressAutomationFramework
             {
                 public static void Select()
                 {
-                    Driver.Instance.FindElement(By.Id("menu-pages")).Click();
-                    Driver.Instance.FindElement(By.LinkText("All Pages")).Click();
+                    MenuSelector.Select("menu-page", "All Pages");
                 }
             }
         }

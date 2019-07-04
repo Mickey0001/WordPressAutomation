@@ -10,14 +10,14 @@ namespace WordPressAutomationFramework
         public static IWebDriver Instance { get; set; }
         public static string BaseAddress
         {
-            get { return "wordpress.com/"; }
+            get { return "http://localhost/test/"; }
         }
 
         public static void Initialize()
         {
             Instance = new ChromeDriver();
             Instance.Manage().Window.Maximize();
-            Instance.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(5);
+            Instance.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(30);
         }
 
         public static void Close()
