@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using WordPressAutomationFramework;
 
 namespace WordPressTests.PostTests
 {
@@ -35,14 +36,45 @@ namespace WordPressTests.PostTests
 
         [TestMethod]
         public void AddedPostsShowUp()
-        //Go to posts, get post count, store
+        {
+            //Go to posts, get post count, store
+            ListPostsPage.GoTo(PostType.Posts);
+            ListPostsPage.StoreCount();
 
-        //Add new post
+            //Add new post
+            NewPostPage.GoTo();
+            NewPostPage.CreatePost("Added posts show up, title")
+                .WithBody("Added posts show up, body").Publish();
 
-        //Go to posts, get new posts count
+            //Go to posts, get new posts count
+            ListPostsPage.GoTo(PostType.Posts);
+            Assert.AreEqual(ListPostsPage.PreviousPostCount + 1, ListPostsPage.CurrentPostCount, "Count of posts did not increase");
 
-        //Check for added post
+            //Check for added post
+            Assert.IsTrue(ListPostsPage.DoesPostExistWithTitle("Added posts show up, title"));
 
-        //Trash post (clean up)
+            //Trash post (clean up)
+            ListPostsPage.TrashPost("Added posts show up, title");
+            Assert.AreEqual(ListPostsPage.PreviousPostCount, ListPostsPage.CurrentPostCount, "Cloud not trash post");
+        }
+        [TestMethod]
+        public void CanSearchPosts()
+        {
+            //Create a new post
+            NewPostPage.GoTo();
+            NewPostPage.CreatePost("Searching posts, title").WithBody("Searching posts, body").Publish();
+
+            //Go to list post
+            ListPostsPage.GoTo(PostType.Posts);
+
+            //Search for the post
+            ListPostsPage.SearchForPost("Searching posts, title");
+
+            //Check that post shows up in the results
+            Assert.IsTrue(ListPostsPage.DoesPostExistWithTitle("Searching posts, title"));
+
+            //Trash the post
+            ListPostsPage.TrashPost("Searching posts, title");
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
+using System;
 using System.Collections.ObjectModel;
 using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.Linq;
@@ -64,7 +65,7 @@ namespace WordPressAutomationFramework
             foreach (var row in rows)
             {
                 ReadOnlyCollection<IWebElement> links = null;
-                links = row.FindElements(By.LinkText(title));
+                Driver.NoWait(() => links = row.FindElements(By.LinkText(title)));
 
                 if (links.Count > 0)
                 {
@@ -75,6 +76,14 @@ namespace WordPressAutomationFramework
                     return;
                 }
             }
+        }
+
+        public static void SearchForPost(string SearchString)
+        {
+            var SearchBox = Driver.Instance.FindElement(By.Id("post-search-input"));
+            SearchBox.SendKeys(SearchString);
+
+            var SearchButton = Driver.Instance.FindElement(By.Id("search-submit"));
         }
     }
 

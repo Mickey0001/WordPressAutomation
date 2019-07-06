@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
+using System.Collections.ObjectModel;
 using System.Threading;
 
 namespace WordPressAutomationFramework
@@ -17,7 +18,7 @@ namespace WordPressAutomationFramework
         {
             Instance = new ChromeDriver();
             Instance.Manage().Window.Maximize();
-            Instance.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(30);
+            TurnOnWait();
         }
 
         public static void Close()
@@ -28,6 +29,23 @@ namespace WordPressAutomationFramework
         public static void Wait(TimeSpan timeSpan)
         {
             Thread.Sleep((int)timeSpan.TotalSeconds * 1000);
+        }
+
+        public static void NoWait(Action action)
+        {
+            TurnOfWait();
+            action();
+            TurnOnWait();
+        }
+
+        private static void TurnOnWait()
+        {
+            Instance.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(25);
+        }
+
+        private static void TurnOfWait()
+        {
+            Instance.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(0);
         }
     }
 }
