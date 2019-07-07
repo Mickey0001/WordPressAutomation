@@ -42,19 +42,17 @@ namespace WordPressTests.PostTests
             ListPostsPage.StoreCount();
 
             //Add new post
-            NewPostPage.GoTo();
-            NewPostPage.CreatePost("Added posts show up, title")
-                .WithBody("Added posts show up, body").Publish();
-
+            PostCreator.CreatePost();
+  
             //Go to posts, get new posts count
             ListPostsPage.GoTo(PostType.Posts);
             Assert.AreEqual(ListPostsPage.PreviousPostCount + 1, ListPostsPage.CurrentPostCount, "Count of posts did not increase");
 
             //Check for added post
-            Assert.IsTrue(ListPostsPage.DoesPostExistWithTitle("Added posts show up, title"));
+            Assert.IsTrue(ListPostsPage.DoesPostExistWithTitle(PostCreator.PreviousTitle));
 
             //Trash post (clean up)
-            ListPostsPage.TrashPost("Added posts show up, title");
+            ListPostsPage.TrashPost(PostCreator.PreviousTitle));
             Assert.AreEqual(ListPostsPage.PreviousPostCount, ListPostsPage.CurrentPostCount, "Cloud not trash post");
         }
         [TestMethod]
