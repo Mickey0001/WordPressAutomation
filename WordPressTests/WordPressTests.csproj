@@ -50,7 +50,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PostTests\AllPostsTest.cs" />
-    <Compile Include="PostTests\PostCreator.cs" />
     <Compile Include="SmokeTests\CreatePostTests.cs" />
     <Compile Include="SmokeTests\LoginTests.cs" />
     <Compile Include="SmokeTests\PageTests.cs" />

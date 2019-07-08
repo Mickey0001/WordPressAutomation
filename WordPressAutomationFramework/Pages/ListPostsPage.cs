@@ -80,11 +80,26 @@ namespace WordPressAutomationFramework
 
         public static void SearchForPost(string SearchString)
         {
+            if(!IsAt)
+                ListPostsPage.GoTo(PostType.Posts);
+
             var SearchBox = Driver.Instance.FindElement(By.Id("post-search-input"));
             SearchBox.SendKeys(SearchString);
 
             var SearchButton = Driver.Instance.FindElement(By.Id("search-submit"));
         }
+        public static bool IsAt
+        {
+            get
+            {
+                //Create generalize IsAt for all posts
+                var h1s = Driver.Instance.FindElements(By.TagName("h1"));
+                if (h1s.Count > 0)
+                    return h1s[0].Text == "Posts";
+                return false;
+            }
+        }
+
     }
 
     public enum PostType

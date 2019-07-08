@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WordPressAutomationFramework;
+using WordPressAutomationFramework.Workflows;
 
 namespace WordPressTests.PostTests
 {
@@ -37,42 +38,27 @@ namespace WordPressTests.PostTests
         [TestMethod]
         public void AddedPostsShowUp()
         {
-            //Go to posts, get post count, store
             ListPostsPage.GoTo(PostType.Posts);
             ListPostsPage.StoreCount();
 
-            //Add new post
             PostCreator.CreatePost();
   
-            //Go to posts, get new posts count
             ListPostsPage.GoTo(PostType.Posts);
             Assert.AreEqual(ListPostsPage.PreviousPostCount + 1, ListPostsPage.CurrentPostCount, "Count of posts did not increase");
 
-            //Check for added post
             Assert.IsTrue(ListPostsPage.DoesPostExistWithTitle(PostCreator.PreviousTitle));
 
-            //Trash post (clean up)
-            ListPostsPage.TrashPost(PostCreator.PreviousTitle));
+            ListPostsPage.TrashPost(PostCreator.PreviousTitle);
             Assert.AreEqual(ListPostsPage.PreviousPostCount, ListPostsPage.CurrentPostCount, "Cloud not trash post");
         }
         [TestMethod]
         public void CanSearchPosts()
         {
-            //Create a new post
-            NewPostPage.GoTo();
-            NewPostPage.CreatePost("Searching posts, title").WithBody("Searching posts, body").Publish();
+            PostCreator.CreatePost();
 
-            //Go to list post
-            ListPostsPage.GoTo(PostType.Posts);
+            ListPostsPage.SearchForPost(PostCreator.PreviousTitle);
 
-            //Search for the post
-            ListPostsPage.SearchForPost("Searching posts, title");
-
-            //Check that post shows up in the results
-            Assert.IsTrue(ListPostsPage.DoesPostExistWithTitle("Searching posts, title"));
-
-            //Trash the post
-            ListPostsPage.TrashPost("Searching posts, title");
+            Assert.IsTrue(ListPostsPage.DoesPostExistWithTitle(PostCreator.PreviousTitle));
         }
     }
 }
