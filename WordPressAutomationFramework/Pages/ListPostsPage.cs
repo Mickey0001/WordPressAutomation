@@ -1,6 +1,5 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
-using System;
 using System.Collections.ObjectModel;
 using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.Linq;
@@ -33,6 +32,8 @@ namespace WordPressAutomationFramework
 
                 case PostType.Posts:
                     LeftNavigation.Posts.AllPosts.Select();
+                  //  if (!IsAt)
+                      //  Error.Log("Did not navigate to all posts!");
                     break;
             }
         }
@@ -100,6 +101,7 @@ namespace WordPressAutomationFramework
             }
         }
 
+        public static object Error { get; private set; }
     }
 
     public enum PostType
